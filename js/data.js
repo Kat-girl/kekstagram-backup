@@ -71,12 +71,13 @@ const getComments = () => Array.from({length: getRandomPositiveInteger(1, 10)}, 
 // создаем объект для описания фотографий
 const generateUserId = createRandomIdFromRangeGenerator (1, 25);
 const generatePhotoId = createRandomIdFromRangeGenerator (1, 25);
+
 const  getPhotosDescriptions = () => ({
   id: generateUserId(),
   url: `photos/${  generatePhotoId()  }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomPositiveInteger(15, 200),
-  commemts: getComments()
+  comments: getComments()
 });
 
 // генерируем массив из 25 объектов - описаний фотографий
