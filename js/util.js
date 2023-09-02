@@ -32,7 +32,7 @@ function createRandomIdFromRangeGenerator (min, max) {
   return function () {
     let currentValue = getRandomPositiveInteger(min, max);
     if (previousValues.length >= max - min + 1) {
-      throw(`Перебраны все числа из диапазона от ${  min  } до ${  max}`);
+      throw Error (`Перебраны все числа из диапазона от ${  min  } до ${  max}`);
     }
     while (previousValues.includes(currentValue)) {
       currentValue = getRandomPositiveInteger(min, max);
