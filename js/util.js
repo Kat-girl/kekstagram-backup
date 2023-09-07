@@ -42,4 +42,7 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-export {getRandomPositiveInteger, getRandomArrayElement, createIdGenerator, createRandomIdFromRangeGenerator};
+// Проверка нажатой клавиши Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomPositiveInteger, getRandomArrayElement, createIdGenerator, createRandomIdFromRangeGenerator, isEscapeKey};

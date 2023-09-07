@@ -1,28 +1,28 @@
+import { isEscapeKey } from './util.js';
+
 const bigPictureModal = document.querySelector('.big-picture');
 const closeModalButton = bigPictureModal.querySelector('.big-picture__cancel');
 
-// открытие модального окна
-const openModal = () => {
-  bigPictureModal.classList.remove('hidden');
-  document.querySelector('body').classList.add('modal-open');
-};
-
-// закрытие модального окна
-const closeModal = () => {
-  bigPictureModal.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
-};
-
 const onKeyDown = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
     closeModal();
   }
 };
 
-const onCloseModal = () => {
-  closeModal();
+// открытие модального окна
+function openModal  ()  {
+  bigPictureModal.classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
+  document.addEventListener ('keydown', onKeyDown);
+}
+
+// закрытие модального окна
+function closeModal ()  {
+  bigPictureModal.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener ('keydown', onKeyDown);
-};
+}
 
 const showFullsizePhoto = (data) => {
   const bigPicture = bigPictureModal.querySelector('.big-picture__img').children[0];
@@ -55,7 +55,6 @@ const renderComments = (data) => {
 
 const showBigPicture = (data) => {
   openModal();
-  document.addEventListener ('keydown', onKeyDown);
 
   bigPictureModal.querySelector('.social__comment-count').classList.add('hidden');
   bigPictureModal.querySelector('.comments-loader').classList.add('hidden');
@@ -63,7 +62,9 @@ const showBigPicture = (data) => {
   showFullsizePhoto(data);
   renderComments(data.comments);
 
-  closeModalButton.addEventListener('click', onCloseModal);
+  closeModalButton.addEventListener('click', () => {
+    closeModal ();
+  });
 };
 
 export {showBigPicture};
